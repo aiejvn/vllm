@@ -18,11 +18,6 @@ from vllm.inputs import TokensPrompt
 from ..models.utils import dummy_hf_overrides
 from ..utils import create_new_process_for_each_test
 
-# Warmup coverage is still incomplete for these backends, so the monitor fires
-# during inference. Tracked in https://github.com/vllm-project/vllm/issues/49349;
-# drop this once the warmup contract migrations land.
-pytestmark = pytest.mark.skip(reason="Kernel warmup coverage is still incomplete")
-
 
 @dataclass(frozen=True, slots=True)
 class JitModel:
@@ -32,20 +27,7 @@ class JitModel:
 
 
 JIT_MONITOR_MODELS = [
-    JitModel("Qwen/Qwen3-0.6B"),
-    JitModel("deepseek-ai/DeepSeek-V2-Lite-Chat", trust_remote_code=True),
-    JitModel("deepseek-ai/DeepSeek-V3", trust_remote_code=True),
-    JitModel("ibm-granite/granite-4.0-tiny-preview"),
-    JitModel(
-        "vllm-project/deepseek_mtp_main_random",
-        draft="vllm-project/deepseek_mtp_draft_random",
-        trust_remote_code=True,
-    ),
-    JitModel(
-        "vllm-project/deepseek-v3-random",
-        draft="vllm-project/eagle-deepseek-v3-random",
-        trust_remote_code=True,
-    ),
+    JitModel("vllm-project/Kimi-K3-8L-dummy", trust_remote_code=True),
 ]
 
 
